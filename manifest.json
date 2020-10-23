@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "CnxCarrierCopyBtn",
+  "description": "CNX Carrier Copy Button",
+  "version": "1",
+  "author": "anydef",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_title": "CnxCarrierCopyBtn",
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon/favicon.ico",
+      "32": "icon/favicon.ico"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery.js","content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icon/favicon.ico",
+    "32": "icon/favicon.ico"
+  },
+  "permissions": ["storage","activeTab","declarativeContent"]
+}
