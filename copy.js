@@ -1,11 +1,11 @@
-var changeBlur = document.getElementById('copy');
+var changeCopy = document.getElementById('copy');
 
 //on init update the UI checkbox based on storage
 chrome.storage.sync.get('enabled', function(data) {
-  changeBlur.checked=data.enabled;
+  changeCopy.checked=data.enabled;
 });
 
-changeBlur.onchange = function(element) {
+changeCopy.onchange = function(element) {
   let value = this.checked;
 
   //update the extension storage value
@@ -16,13 +16,13 @@ changeBlur.onchange = function(element) {
   //Pass init or remove message to content script
   if(value){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {command: "init", hide: value}, function(response) {
+      chrome.tabs.sendMessage(tabs[0].id, {command: "init", enabled: value}, function(response) {
         console.log(response.result);
       });
     });
   }else{
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {command: "remove", hide: value}, function(response) {
+      chrome.tabs.sendMessage(tabs[0].id, {command: "remove", enabled: value}, function(response) {
         console.log(response.result);
       });
     });
